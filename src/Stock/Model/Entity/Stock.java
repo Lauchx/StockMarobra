@@ -36,4 +36,8 @@ public class Stock {
     public void setCurrentQuantity(int currentQuantity) {
         this.currentQuantity = currentQuantity;
     }
+    @Override
+    public String toString(){
+        return " |Cantidad actual: " + this.currentQuantity + " |Entrante:" + this.inbound + " |Saliente:" +this.outbond;
+    }
 }
