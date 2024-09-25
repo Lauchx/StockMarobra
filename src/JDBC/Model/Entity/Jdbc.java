@@ -22,35 +22,46 @@ import stockmarobra.Program;
 public class Jdbc {
 
     Connection cn = null;
-    String insertStmt = "INSERT INTO Product(name) VALUES(?);";
+    String insertStmtProduct = "INSERT INTO Products(name, categoryName, stock_id, ancho, alto, profundidad) VALUES(?,?,?,?,?,?);";
+    String insertStmtStock = "INSERT INTO Stock(currentQuantity) VALUES(?);";
 
     public void ConnectionSQL(Product product) {
         try {
-            cn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Marobra;user=userMarobra;password=root");
+            //cn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Marobra;user=userMarobra;password=root");
+            cn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/prueba?user=root&password=root");
             System.out.println("Conectado");
-
             System.out.println("Agregar un producto");
 
-            PreparedStatement pstmt = cn.prepareStatement(insertStmt, Statement.RETURN_GENERATED_KEYS);
-
-            pstmt.setString(1, product.getName());
-            pstmt.execute();
-            //pstmt.executeBatch();
-
-            ResultSet rs = pstmt.getGeneratedKeys(); // this id it´s in the position 1
-            if (rs.next()) {
-                product.setId(rs.getInt(1)); // set ID in the position 1
-            }
-
-            System.out.println("");
-            System.out.println("Listamos Person");
-            String sql = "SELECT id, name FROM Product;";
-
-            Statement stmt = cn.createStatement();
-            //stmt.execute(sql);
-            stmt.executeQuery(sql);
-            rs = stmt.getResultSet();
+            PreparedStatement pstmtStock = cn.prepareStatement(insertStmtStock, Statement.RETURN_GENERATED_KEYS);
+            pstmtStock.setInt(1, product.getStock().getCurrentQuantity());
+            pstmtStock.executeUpdate();
             
+               ResultSet rsStock = pstmtStock.getGeneratedKeys(); // this id begin in the position 1
+               int stock_id = 0;
+            if (rsStock.next()) {
+                stock_id = rsStock.getInt(1);
+            }
+            
+            PreparedStatement pstmtProduct = cn.prepareStatement(insertStmtProduct, Statement.RETURN_GENERATED_KEYS);
+            pstmtProduct.setString(1, product.getName());
+            pstmtProduct.setString(2, product.getCategory());
+            pstmtProduct.setInt(3, stock_id);   
+            pstmtProduct.setInt(4, product.getWidth());
+            pstmtProduct.setInt(5, product.getHeight());
+            pstmtProduct.setInt(6, product.getDepth());
+            pstmtProduct.executeUpdate();
+            System.out.println("producto agregado");
+            
+            
+            // SE GUARDAN LOS PRODUCTOS VAMOOOOO
+//            System.out.println("");
+//            System.out.println("Listamos Person");
+//            String sql = "SELECT id, name FROM Product;";
+//
+//            Statement stmt = cn.createStatement();
+//            //stmt.execute(sql);
+//            stmt.executeQuery(sql);
+//            rs = stmt.getResultSet();
 
         } catch (SQLException ex) {
             Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);

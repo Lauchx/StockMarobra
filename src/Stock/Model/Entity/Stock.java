@@ -2,6 +2,7 @@ package Stock.Model.Entity;
 
 public class Stock {
 
+    int id;
     int inbound;
     int outbond;
     int currentQuantity;
@@ -9,8 +10,8 @@ public class Stock {
     public Stock(int currentQuantity) {
         // when create de Products. After modified with seters
         this.currentQuantity = currentQuantity;
-       this.inbound = 0;
-       this.outbond = 0;
+        this.inbound = 0;
+        this.outbond = 0;
     }
 
     public int getInbound() {
@@ -36,8 +37,9 @@ public class Stock {
     public void setCurrentQuantity(int currentQuantity) {
         this.currentQuantity = currentQuantity;
     }
+
     @Override
-    public String toString(){
-        return " |Cantidad actual: " + this.currentQuantity + " |Entrante:" + this.inbound + " |Saliente:" +this.outbond;
+    public String toString() {
+        return " |Cantidad actual: " + this.currentQuantity + " |Entrante:" + this.inbound + " |Saliente:" + this.outbond;
     }
 }
