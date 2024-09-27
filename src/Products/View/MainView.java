@@ -1,12 +1,9 @@
 package Products.View;
 
-import Products.Model.Entity.Product;
-import Stock.Model.Entity.Stock;
+
+import Stock.View.StockProductsView;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+
 
 public class MainView extends javax.swing.JFrame {
 

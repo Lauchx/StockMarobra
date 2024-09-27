@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/jpa/model/entity/jpa.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/META-INF/persistence.xml</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/Products/View/ProductView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/JDBC/Model/Dao/Dao.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/Products/View/MainView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/Products/Model/Entity/Product.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/JDBC/Model/Entity/Jdbc.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/Stock/Model/Entity/Stock.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/Proyectos/StockMarobra/src/Products/View/StockProductsView.java</file>
         </group>
     </open-files>
 </project-private>

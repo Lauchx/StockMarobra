@@ -4,9 +4,11 @@
  */
 package Products.View;
 
-import JDBC.Model.Entity.Jdbc;
+import Products.Model.Repository.JDBC.ProductDaoJDBC;
 import Products.Model.Entity.Product;
+import Products.Model.Repository.JPA.ProductDaoJPA;
 import Stock.Model.Entity.Stock;
+import interfaces.Dao;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,13 +16,13 @@ import javax.swing.JOptionPane;
  * @author retam
  */
 public class ProductView extends javax.swing.JPanel {
-    private Jdbc jdbc;
-    /**
-     * Creates new form ProductView
-     */
+
+    private Dao<Product> productDao;
+
     public ProductView() {
         initComponents();
-        jdbc = new Jdbc();
+        //this.productDao = new ProductDaoJPA(); 
+        this.productDao = new ProductDaoJDBC();
     }
 
     /**
@@ -183,12 +185,12 @@ public class ProductView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPActionPerformed
-       
+
         try {
             Stock stock = new Stock(Integer.parseInt(txtfCurrentQ.getText()));
             Product product = new Product(txtfName.getText(), txtfCategory.getText(), Integer.parseInt(txtfWidth.getText()), Integer.parseInt(txtfHeight.getText()), Integer.parseInt(txtfDepth.getText()), stock);
-            lprod.setText(product.toString());
-             this.jdbc.ConnectionSQL(product);
+            lprod.setText(product.toString()); // se va a eliminar
+            this.productDao.create(product);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingresa solo números en los campos: Ancho, alto, profundidad y Cantidad Actual", "Error de entrada", JOptionPane.ERROR_MESSAGE);
         }

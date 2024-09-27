@@ -1,15 +1,40 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Products.Model.Entity;
 
 import Stock.Model.Entity.Stock;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-public class Product {
+/**
+ *
+ * @author retam
+ */
+@Entity
+@Table(name = "products")
+public class Product implements Serializable {
 
-    public int id; // poner en el constructor o hacer algo
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    private String category;
+    private String category; // hacer clase especifica para category
     private int width;
     private int height;
     private int depth;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     public Product(String name, String category, int width, int height, int depth, Stock stock) {
@@ -20,7 +45,7 @@ public class Product {
         this.depth = depth;
         this.stock = stock;
     }
-     public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -48,13 +73,13 @@ public class Product {
         this.stock = stock;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
+      public Long getId() {
+        return id;
+    }
+
 
     public String getCategory() {
         return category;
@@ -76,9 +101,57 @@ public class Product {
         return stock;
     }
 
-    
     @Override
-    public String toString(){
-        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: "+this.width + " |Alto: " + this.height + " |Profundidad: " + this.depth + this.stock.toString();
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + Objects.hashCode(this.category);
+        hash = 61 * hash + this.width;
+        hash = 61 * hash + this.height;
+        hash = 61 * hash + this.depth;
+        hash = 61 * hash + Objects.hashCode(this.stock);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (this.width != other.width) {
+            return false;
+        }
+        if (this.height != other.height) {
+            return false;
+        }
+        if (this.depth != other.depth) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.category, other.category)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.stock, other.stock);
+    }
+
+   
+
+     @Override
+    public String toString() {
+        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: " + this.width + " |Alto: " + this.height + " |Profundidad: " + this.depth + this.stock.toString();
+    }
+
 }
