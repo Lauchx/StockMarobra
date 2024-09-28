@@ -4,17 +4,22 @@
  */
 package Stock.View;
 
+import Products.Model.Entity.Product;
+import interfaces.Dao;
+
 /**
  *
  * @author retam
  */
 public class StockProductsView extends javax.swing.JPanel {
-
+     private Dao<Product> productDao;
     /**
      * Creates new form StockProducts
      */
     public StockProductsView() {
         initComponents();
+        
+        //this.jLabel1.setText(() -> { console      ;}); 
     }
 
     /**

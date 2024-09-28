@@ -36,7 +36,8 @@ public class ProductDaoJPA implements Dao<Product> {
 
     @Override
     public List<Product> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.eManager.getTransaction().begin();
+        
     }
 
     @Override

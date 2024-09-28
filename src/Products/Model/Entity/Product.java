@@ -32,7 +32,7 @@ public class Product implements Serializable {
     private String category; // hacer clase especifica para category
     private int width;
     private int height;
-    private int depth;
+    private int large;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
     private Stock stock;
@@ -42,7 +42,7 @@ public class Product implements Serializable {
         this.category = category;
         this.width = width;
         this.height = height;
-        this.depth = depth;
+        this.large = depth;
         this.stock = stock;
     }
     public void setId(Long id) {
@@ -66,7 +66,7 @@ public class Product implements Serializable {
     }
 
     public void setDepth(int depth) {
-        this.depth = depth;
+        this.large = depth;
     }
 
     public void setStock(Stock stock) {
@@ -94,7 +94,7 @@ public class Product implements Serializable {
     }
 
     public int getDepth() {
-        return depth;
+        return large;
     }
 
     public Stock getStock() {
@@ -109,7 +109,7 @@ public class Product implements Serializable {
         hash = 61 * hash + Objects.hashCode(this.category);
         hash = 61 * hash + this.width;
         hash = 61 * hash + this.height;
-        hash = 61 * hash + this.depth;
+        hash = 61 * hash + this.large;
         hash = 61 * hash + Objects.hashCode(this.stock);
         return hash;
     }
@@ -132,7 +132,7 @@ public class Product implements Serializable {
         if (this.height != other.height) {
             return false;
         }
-        if (this.depth != other.depth) {
+        if (this.large != other.large) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -151,7 +151,7 @@ public class Product implements Serializable {
 
      @Override
     public String toString() {
-        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: " + this.width + " |Alto: " + this.height + " |Profundidad: " + this.depth + this.stock.toString();
+        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: " + this.width + " |Alto: " + this.height + " |Profundidad: " + this.large + this.stock.toString();
     }
 
 }
