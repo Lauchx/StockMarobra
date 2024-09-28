@@ -5,7 +5,9 @@
 package Stock.View;
 
 import Products.Model.Entity.Product;
+import Products.Model.Repository.JPA.ProductDaoJPA;
 import interfaces.Dao;
+import java.util.List;
 
 /**
  *
@@ -18,8 +20,16 @@ public class StockProductsView extends javax.swing.JPanel {
      */
     public StockProductsView() {
         initComponents();
-        
+        this.productDao = new ProductDaoJPA();
+        getProducts(this.productDao);
         //this.jLabel1.setText(() -> { console      ;}); 
+    }
+    public void getProducts(Dao<Product> productDao){
+        
+        List<Product> listProducts = this.productDao.getAll();
+        for(Product p: listProducts){
+         this.tStockProducts.setValueAt( p.getId(),0,0);
+        }
     }
 
     /**
@@ -31,24 +41,47 @@ public class StockProductsView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tStockProducts = new javax.swing.JTable();
 
-        jLabel1.setText("Stock Products");
+        tStockProducts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nombre", "Categoria", "Ancho", "Alto", "Largo", "Entrante", "Saliente", "Cantidad Actual"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tStockProducts);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 47, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tStockProducts;
     // End of variables declaration//GEN-END:variables
 }

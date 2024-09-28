@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "products")
+@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,17 +34,20 @@ public class Product implements Serializable {
     private String category; // hacer clase especifica para category
     private int width;
     private int height;
-    private int large;
+    private int length;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
     private Stock stock;
+
+    public Product() {
+    }
 
     public Product(String name, String category, int width, int height, int depth, Stock stock) {
         this.name = name;
         this.category = category;
         this.width = width;
         this.height = height;
-        this.large = depth;
+        this.length = depth;
         this.stock = stock;
     }
     public void setId(Long id) {
@@ -66,7 +71,7 @@ public class Product implements Serializable {
     }
 
     public void setDepth(int depth) {
-        this.large = depth;
+        this.length = depth;
     }
 
     public void setStock(Stock stock) {
@@ -94,7 +99,7 @@ public class Product implements Serializable {
     }
 
     public int getDepth() {
-        return large;
+        return length;
     }
 
     public Stock getStock() {
@@ -109,7 +114,7 @@ public class Product implements Serializable {
         hash = 61 * hash + Objects.hashCode(this.category);
         hash = 61 * hash + this.width;
         hash = 61 * hash + this.height;
-        hash = 61 * hash + this.large;
+        hash = 61 * hash + this.length;
         hash = 61 * hash + Objects.hashCode(this.stock);
         return hash;
     }
@@ -132,7 +137,7 @@ public class Product implements Serializable {
         if (this.height != other.height) {
             return false;
         }
-        if (this.large != other.large) {
+        if (this.length != other.length) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -151,7 +156,7 @@ public class Product implements Serializable {
 
      @Override
     public String toString() {
-        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: " + this.width + " |Alto: " + this.height + " |Profundidad: " + this.large + this.stock.toString();
+        return "Nombre: " + this.name + " |Category: " + this.category + " |Ancho: " + this.width + " |Alto: " + this.height + " |Profundidad: " + this.length + this.stock.toString();
     }
 
 }

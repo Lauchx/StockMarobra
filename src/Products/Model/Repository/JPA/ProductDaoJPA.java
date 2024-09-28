@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ProductDaoJPA implements Dao<Product> {
 
@@ -36,8 +37,8 @@ public class ProductDaoJPA implements Dao<Product> {
 
     @Override
     public List<Product> getAll() {
-        this.eManager.getTransaction().begin();
-        
+        Query query = this.eManager.createNamedQuery("Product.findAll");
+         return query.getResultList();
     }
 
     @Override
